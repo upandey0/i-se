@@ -5,6 +5,7 @@ export interface Internship {
   location: string;
   isRemote?: boolean;
   duration: string;
+  profile?: string;
   stipend: {
     amount: string;
     period: string;

@@ -4,7 +4,13 @@ import { Button } from '../common/Button';
 import { UserPreferencesModal } from '../../modal/UserPreferenceModal';
 import { FilterChips } from './FilterChips';
 
-const FilterModal = ({ isOpen, onClose, children }) => {
+interface FilterModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  children: React.ReactNode;
+}
+
+const FilterModal = ({ isOpen, onClose, children }: FilterModalProps) => {
   if (!isOpen) return null;
 
   useEffect(() => {
@@ -93,7 +99,7 @@ export const FilterAccordion = ({ className = '' }) => {
           </Button>
           
           <Button
-            variant="icon"
+            variant="secondary"
             size="sm"
             onClick={() => setIsPreferencesModalOpen(true)}
             className="md:hidden"
@@ -106,7 +112,7 @@ export const FilterAccordion = ({ className = '' }) => {
          
           {/* Filter toggle/open button - changes behavior based on screen size */}
           <Button
-            variant="icon"
+            variant="secondary"
             size="sm"
             onClick={handleFilterClick}
             className={isMobile ? "flex" : "hidden"}

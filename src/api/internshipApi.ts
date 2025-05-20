@@ -23,9 +23,9 @@ export const getInternships = async (
   // If we don't have cached data yet, fetch all internships
   if (internshipCache.length === 0) {
     const url = API_ROUTE.INTERNSHIPS;
-    const response = await _get(url);
+    const response: { isError?: boolean; data?: { data?: any } } = await _get(url);
     
-    if (!response.isError && response.data) {
+    if (!response.isError && response.data && response.data.data) {
       internshipCache = transformInternshipData(response.data.data);
     }
   }

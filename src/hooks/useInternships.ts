@@ -53,7 +53,7 @@ export const useInternships = (): UseInternshipsReturn => {
             ...prev,
             profiles: Array.isArray(profilesResponse.data) 
               ? profilesResponse.data
-              : Object.keys(profilesResponse.data),
+              : Object.keys(profilesResponse.data as object),
           }));
         }
 
@@ -62,7 +62,7 @@ export const useInternships = (): UseInternshipsReturn => {
             ...prev,
             locations: Array.isArray(locationsResponse.data) 
               ? locationsResponse.data
-              : Object.keys(locationsResponse.data),
+              : Object.keys(locationsResponse.data as object),
           }));
         }
 
@@ -71,7 +71,7 @@ export const useInternships = (): UseInternshipsReturn => {
             ...prev,
             durations: Array.isArray(durationsResponse.data) 
               ? durationsResponse.data
-              : Object.keys(durationsResponse.data),
+              : Object.keys(durationsResponse.data as object),
           }));
         }
       } catch (err) {

@@ -54,37 +54,37 @@ export const FilterSection: React.FC = () => {
   const [locationSearch, setLocationSearch] = useState('');
   
   // Filtered options based on search
-  const [filteredProfiles, setFilteredProfiles] = useState([]);
-  const [filteredLocations, setFilteredLocations] = useState([]);
+  const [filteredProfiles, setFilteredProfiles] = useState<string[]>([]);
+  const [filteredLocations, setFilteredLocations] = useState<string[]>([]);
   
   // Track if user has typed enough to show suggestions
   const [showProfileSuggestions, setShowProfileSuggestions] = useState(false);
   const [showLocationSuggestions, setShowLocationSuggestions] = useState(false);
   
   // Create refs for the suggestion containers
-  const profileSuggestionsRef = useRef(null);
-  const locationSuggestionsRef = useRef(null);
-  const profileInputRef = useRef(null);
-  const locationInputRef = useRef(null);
+  const profileSuggestionsRef = useRef<HTMLDivElement>(null);
+  const locationSuggestionsRef = useRef<HTMLDivElement>(null);
+  const profileInputRef = useRef<HTMLDivElement>(null);
+  const locationInputRef = useRef<HTMLDivElement>(null);
   
   // Handle click outside suggestions to dismiss them
   useEffect(() => {
-    function handleClickOutside(event) {
+    function handleClickOutside(event: MouseEvent) {
       // For profile suggestions
       if (showProfileSuggestions && 
           profileSuggestionsRef.current && 
-          !profileSuggestionsRef.current.contains(event.target) &&
+          !profileSuggestionsRef.current.contains(event.target as Node) &&
           profileInputRef.current && 
-          !profileInputRef.current.contains(event.target)) {
+          !profileInputRef.current.contains(event.target as Node)) {
         setShowProfileSuggestions(false);
       }
       
       // For location suggestions
       if (showLocationSuggestions && 
           locationSuggestionsRef.current && 
-          !locationSuggestionsRef.current.contains(event.target) &&
+          !locationSuggestionsRef.current.contains(event.target as Node) &&
           locationInputRef.current && 
-          !locationInputRef.current.contains(event.target)) {
+          !locationInputRef.current.contains(event.target as Node)) {
         setShowLocationSuggestions(false);
       }
     }
@@ -130,7 +130,7 @@ export const FilterSection: React.FC = () => {
   }, [locationSearch]);
   
   // Handle selecting a profile
-  const handleProfileSelect = (profile) => {
+  const handleProfileSelect = (profile: string) => {
     const currentProfiles = [...(filters.profile || [])];
     if (!currentProfiles.includes(profile)) {
       updateFilters({ profile: [...currentProfiles, profile] });
@@ -140,7 +140,7 @@ export const FilterSection: React.FC = () => {
   };
   
   // Handle selecting a location
-  const handleLocationSelect = (location) => {
+  const handleLocationSelect = (location : any) => {
     const currentLocations = [...(filters.location || [])];
     if (!currentLocations.includes(location)) {
       updateFilters({ location: [...currentLocations, location] });
@@ -149,7 +149,7 @@ export const FilterSection: React.FC = () => {
     setShowLocationSuggestions(false);
   };
   
-  const handleDurationChange = (duration, isChecked) => {
+  const handleDurationChange = (duration: string, isChecked: boolean) => {
     const currentDurations = [...(filters.duration || [])];
     
     if (isChecked) {
@@ -161,7 +161,7 @@ export const FilterSection: React.FC = () => {
     }
   };
   
-  const handleStipendChange = (value) => {
+  const handleStipendChange = (value: { min: number; max: number }) => {
     // Ensure min doesn't exceed max
     const validValue = {
       min: Math.min(value.min, value.max),
@@ -174,15 +174,15 @@ export const FilterSection: React.FC = () => {
     updateFilters({ stipendRange: validValue });
   };
   
-  const handleRemoteChange = (isChecked) => {
-    updateFilters({ isRemote: isChecked });
+  const handleRemoteChange = (isChecked: any) => {
+    updateFilters({ isRemote: isChecked ? true : undefined });
   };
   
-  const handlePartTimeChange = (isChecked) => {
-    updateFilters({ isPartTime: isChecked });
+  const handlePartTimeChange = (isChecked: any) => {
+    updateFilters({ isPartTime: isChecked ? true : undefined });
   };
   
-  const formatStipend = (value) => {
+  const formatStipend = (value: number) => {
     if (value === 0) return '₹0';
     if (value >= 1000) return `₹${value / 1000}K`;
     return `₹${value}`;

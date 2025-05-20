@@ -31,7 +31,7 @@ export const RangeSlider: React.FC<RangeSliderProps> = ({
     });
   }, [value.min, value.max]);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
     const fieldName = e.target.name;
     
@@ -41,9 +41,9 @@ export const RangeSlider: React.FC<RangeSliderProps> = ({
     });
   };
   
-  const handleInputBlur = (e) => {
+  const handleInputBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     const newValue = parseFloat(e.target.value);
-    const fieldName = e.target.name;
+    const fieldName = e.target.name as 'min' | 'max';
     
     if (isNaN(newValue)) {
       setInputValues({
@@ -62,13 +62,13 @@ export const RangeSlider: React.FC<RangeSliderProps> = ({
     }
   };
   
-  const handleKeyPress = (e) => {
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      handleInputBlur(e);
+      (e.target as HTMLInputElement).blur();
     }
   };
   
-  const handleRangeChange = (e) => {
+  const handleRangeChange = (e: { target: { value: string; name: any; }; }) => {
     const newValue = parseInt(e.target.value, 10);
     const fieldName = e.target.name;
     
