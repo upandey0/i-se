@@ -11,10 +11,9 @@ import { ThemeProvider } from '../contexts/ThemeContext';
 import { getInternships } from '../api/internshipApi';
 
 export const InternshipSearchContent = () => {
-  const [searchTerm, setSearchTerm] = useState('');
   const { filters, updateFilters, clearFilter } = useFilters();
-  const { internships, loading, totalCount, applyFilters } = useInternships();
-  const [page, setPage] = useState(1);
+  const { internships, loading, totalCount } = useInternships();
+  const [_, setPage] = useState(1);
 
   useEffect(()=>{
     const fetchInternships = async () => {

@@ -14,8 +14,7 @@ export const RangeSlider: React.FC<RangeSliderProps> = ({
   max, 
   step, 
   value, 
-  onChange, 
-  formatValue = (val) => val.toString() 
+  onChange
 }) => {
   const [isDragging, setIsDragging] = useState(false);
   

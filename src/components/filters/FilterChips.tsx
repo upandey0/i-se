@@ -10,7 +10,7 @@ interface FilterChipsProps {
 }
 
 export const FilterChips: React.FC<FilterChipsProps> = ({ className = '' }) => {
-  const { filters, updateFilters, clearFilters, clearFilter } = useFilters();
+  const { filters, updateFilters, clearFilters } = useFilters();
  
   // Handle profile filter removal
   const handleProfileRemove = (profile: string) => {

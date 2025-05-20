@@ -188,17 +188,14 @@ export const FilterSection: React.FC = () => {
     return `₹${value}`;
   };
   
-  // Handle input focus to display suggestions if there's content
-  const handleProfileFocus = () => {
-    if (profileSearch.trim().length > 0) {
-      setShowProfileSuggestions(true);
-    }
+  
+  // Manually handle focus
+  const handleProfileInputChange = (value: string) => {
+    setProfileSearch(value);
   };
   
-  const handleLocationFocus = () => {
-    if (locationSearch.trim().length > 0) {
-      setShowLocationSuggestions(true);
-    }
+  const handleLocationInputChange = (value: string) => {
+    setLocationSearch(value);
   };
   
   return (
@@ -222,8 +219,7 @@ export const FilterSection: React.FC = () => {
         <div ref={profileInputRef}>
           <SearchInput 
             value={profileSearch}
-            onChange={setProfileSearch}
-            onFocus={handleProfileFocus}
+            onChange={handleProfileInputChange}
             placeholder="Search for profiles..."
             className="mb-2 w-full"
           />
@@ -252,8 +248,7 @@ export const FilterSection: React.FC = () => {
         <div ref={locationInputRef}>
           <SearchInput 
             value={locationSearch}
-            onChange={setLocationSearch}
-            onFocus={handleLocationFocus}
+            onChange={handleLocationInputChange}
             placeholder="Search for locations..."
             className="mb-2 w-full"
           />

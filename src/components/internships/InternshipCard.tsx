@@ -24,9 +24,7 @@ export const InternshipCard: React.FC<InternshipCardProps> = ({ internship }) =>
 
   // Use state to track if default logo should be used
   const [useDefaultLogo, setUseDefaultLogo] = useState(false);
-
-  // Default logo path
-  const defaultLogoPath = '../../assets/default-company.png';
+  
   const companyLogo = `/${logo}`
 
   useEffect(() => {
